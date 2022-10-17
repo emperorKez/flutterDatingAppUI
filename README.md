@@ -1,4 +1,4 @@
-# dating_app
+# Flutter Dating App UI
 
 A new Flutter project.
 
