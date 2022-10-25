@@ -1,9 +1,8 @@
 import 'package:dating_app/message/chat.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class MessageScreen extends StatefulWidget {
-  MessageScreen({Key? key}) : super(key: key);
+  const MessageScreen({Key? key}) : super(key: key);
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();
@@ -14,19 +13,23 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
+      physics: NeverScrollableScrollPhysics(),
       children: [
-        GridView.builder(
-          shrinkWrap: true,
-          physics: AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
+        Container(
+          height: 200,
+          
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: AlwaysScrollableScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+            ),
+            itemCount: 1,
+            itemBuilder: (BuildContext context, int index) {
+              return activeOnline();
+            },
           ),
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return activeOnline();
-          },
         ),
         SizedBox(
           height: 25,
