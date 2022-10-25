@@ -11,6 +11,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _chatMessage = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,13 +35,11 @@ class _ChatScreenState extends State<ChatScreen> {
            Expanded(
             flex: 8,
             child: TextField(
-              controller: ,
+              controller: _chatMessage,
               
               decoration: InputDecoration(
                 hintText: 'Start typing',
-                border: Border.all(
-
-                )
+                
 
               ),
             )
