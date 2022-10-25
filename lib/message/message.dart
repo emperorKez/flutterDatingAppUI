@@ -17,7 +17,6 @@ class _MessageScreenState extends State<MessageScreen> {
       children: [
         Container(
           height: 200,
-          
           child: GridView.builder(
             shrinkWrap: true,
             physics: AlwaysScrollableScrollPhysics(),
@@ -47,16 +46,19 @@ class _MessageScreenState extends State<MessageScreen> {
   }
 
   Widget activeOnline() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      children: const [
-        CircleAvatar(
-          radius: double.infinity,
-        ),
-        Text('Monalisa')
-      ],
+    return Container(
+      height: 150,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: const [
+          CircleAvatar(
+            radius: double.infinity,
+          ),
+          Text('Monalisa')
+        ],
+      ),
     );
   }
 }
