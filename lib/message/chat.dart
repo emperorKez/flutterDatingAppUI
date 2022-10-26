@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -16,39 +13,59 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios)),
+        title: Text('Chat'),
+        centerTitle: true,
+      ),
       bottomNavigationBar: bottomContainer(),
     ));
   }
 
   bottomContainer() {
     return Container(
-      height: 50,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      //height: 40,
       child: Row(
         children: [
-          Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.camera_enhance),
+          GestureDetector(
+            onTap: () {},
+            child: Icon(
+              Icons.camera_enhance,
+              color: Colors.blueAccent,
+              size: 30,
             ),
           ),
-           Expanded(
-            flex: 8,
-            child: TextField(
-              controller: _chatMessage,
-              
-              decoration: InputDecoration(
-                hintText: 'Start typing',
-                
-
-              ),
-            )
+          SizedBox(
+            width: 10,
           ),
+
           Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.send),
+              child: TextField(
+            controller: _chatMessage,
+            keyboardType: TextInputType.name,
+            //maxLength: 100,
+            decoration: InputDecoration(
+                hintText: 'Start typing',
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0.0, horizontal: 10),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+            onEditingComplete: (() {
+              //
+            }),
+          )),
+          SizedBox(
+            width: 10,
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Icon(
+              Icons.send,
+              color: Colors.blueAccent,
+              size: 30,
             ),
           )
         ],

@@ -1,8 +1,20 @@
-
+import 'package:dating_app/settings/settings.dart';
+import 'package:dating_app/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
+
 class ProfileScreen extends StatelessWidget {
-   ProfileScreen({super.key});
-  final List image = ['assets/images/p1.jpg', 'assets/images/p2.jpg', 'assets/images/p3.jpg', 'assets/images/p4.jpg', 'assets/images/p5.jpg', 'assets/images/p6.jpg', 'assets/images/p7.jpg', 'assets/images/p8.jpg', 'assets/images/p9.jpg'];
+  ProfileScreen({super.key});
+  final List image = [
+    'assets/images/p1.jpg',
+    'assets/images/p2.jpg',
+    'assets/images/p3.jpg',
+    'assets/images/p4.jpg',
+    'assets/images/p5.jpg',
+    'assets/images/p6.jpg',
+    'assets/images/p7.jpg',
+    'assets/images/p8.jpg',
+    'assets/images/p9.jpg'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +30,54 @@ class ProfileScreen extends StatelessWidget {
       body: ListView(
         shrinkWrap: true,
         physics: AlwaysScrollableScrollPhysics(),
-        children: [myPhotos()],
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/p6.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            'Samantha, 24',
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          aboutMe(),
+          SizedBox(
+            height: 15,
+          ),
+          myPhotos(),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(),
+                )),
+          )
+        ],
       ),
+      bottomNavigationBar: BottomNavBar(activeIndex: 0),
     ));
   }
 
+// profilePicture(){
+//   return Container(
+//     height: MediaQuery.of(context).size.width,
+//   )
+// }
   myPhotos() {
     return GridView.builder(
       shrinkWrap: true,
@@ -37,9 +92,62 @@ class ProfileScreen extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset('${image[index]}'),
+          child: Image.asset(
+            '${image[index]}',
+            fit: BoxFit.cover,
+          ),
         );
       },
     );
+  }
+
+  aboutMe() {
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(10)),
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            Text(
+                'I just live for happiness. I have plans and dream for my live and I do my best to get it'),
+            SizedBox(
+              height: 20,
+            ),
+
+            Row(children: const [
+              Icon(Icons.work),
+              SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: Text('Frontend developer at MTN Nigeria'),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+            ]),
+            Row(children: const [
+              Icon(Icons.location_on),
+              SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: Text('Ikeja Lagos'),
+              ),
+            ]),
+            // leading: Icon(Icons.work),
+            // title:
+            //   style: TextStyle(color: Colors.white),
+            // ),
+            // ),
+            // ListTile(
+            //   leading: Icon(Icons.location_on),
+            //   title: Text('Ikeja Lagos', style: TextStyle(color: Colors.white)),
+            // )
+          ],
+        ));
   }
 }

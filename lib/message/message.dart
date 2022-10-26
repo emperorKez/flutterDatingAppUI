@@ -1,4 +1,5 @@
 import 'package:dating_app/message/chat.dart';
+import 'package:dating_app/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class MessageScreen extends StatefulWidget {
@@ -11,69 +12,96 @@ class MessageScreen extends StatefulWidget {
 class _MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: [
-        Container(
-          height: 200,
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: AlwaysScrollableScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
+    return SafeArea(
+        child: Scaffold(
+      body: Column(
+        // shrinkWrap: true,
+        //physics: ClampingScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
+        children: [
+          Container(
+            color: Colors.white,
+            height: 150,
+            child: GridView.builder(
+              //shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 1,
+              ),
+              itemCount: 4,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  // height: 100,
+                  // width: 100,
+                  color: Colors.green,
+                  child: activeOnline(),
+                );
+                
+              },
             ),
-            itemCount: 1,
-            itemBuilder: (BuildContext context, int index) {
-              return activeOnline();
-            },
           ),
-        ),
-        SizedBox(
-          height: 25,
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: AlwaysScrollableScrollPhysics(),
-          itemCount: 10,
-          itemBuilder: (BuildContext context, int index) {
-            return massegeTile();
-          },
-        ),
-      ],
-    );
+          SizedBox(
+            height: 25,
+          ),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                    ),
+                    title: Text('Monica'),
+                    subtitle: Text('how are you today'),
+                    trailing: Text('08:30 AM'),
+                    tileColor: Colors.amberAccent,
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChatScreen()),
+                        ));
+                //return massegeTile();
+              },
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavBar(activeIndex: 2),
+    ));
   }
 
   Widget activeOnline() {
-    return Container(
-      height: 150,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: const [
-          CircleAvatar(
-            radius: double.infinity,
-          ),
-          Text('Monalisa')
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        CircleAvatar(
+          radius: 50,
+        ),
+        Text('Monalisa')
+      ],
     );
   }
 }
 
 Widget massegeTile() {
   return Builder(
-      builder: (context) => ListTile(
-          leading: CircleAvatar(
-            radius: double.infinity,
-          ),
-          title: Text('Monica'),
-          subtitle: Text('how are you today'),
-          trailing: Text('08:30 AM'),
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ChatScreen()),
-              )));
+      builder: (context) => Card(
+            child: ListTile(
+                leading: CircleAvatar(
+                    //radius: double.infinity,
+                    ),
+                title: Text('Monica'),
+                subtitle: Text('how are you today'),
+                trailing: Text('08:30 AM'),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()),
+                    )),
+          ));
 }

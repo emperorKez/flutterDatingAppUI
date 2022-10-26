@@ -1,4 +1,5 @@
 import 'package:dating_app/message/message.dart';
+import 'package:dating_app/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,15 +9,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
+      appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: Icon(Icons.arrow_back_ios)),
         title: Text('My Profile'),
         centerTitle: true,
       ),
-
       body: homeBody(),
+      bottomNavigationBar: BottomNavBar(activeIndex: 1),
     ));
   }
 
@@ -48,17 +49,16 @@ class HomeScreen extends StatelessWidget {
                   Positioned(
                       top: 10,
                       right: 10,
-                      
-                        child: ClipOval(
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.all(5),
-                            child: GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MessageScreen())),
-                                child: Icon(
+                      child: ClipOval(
+                        child: Container(
+                          color: Colors.white,
+                          padding: EdgeInsets.all(5),
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MessageScreen())),
+                            child: Icon(
                               Icons.favorite,
                               color: Colors.blueAccent,
                             ),
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                       right: 10,
                       child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.blueGrey,
+                              color: Colors.grey.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(10)),
                           padding: EdgeInsets.all(10),
                           child: ListView(
@@ -80,16 +80,20 @@ class HomeScreen extends StatelessWidget {
                             children: const [
                               Text(
                                 'Samantha, 24',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
                               ),
                               ListTile(
                                 leading: Icon(Icons.work),
-                                title:
-                                    Text('Frontend developer at MTN Nigeria'),
+                                title: Text(
+                                  'Frontend developer at MTN Nigeria',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               ListTile(
                                 leading: Icon(Icons.location_on),
-                                title: Text('Ikeja Lagos'),
+                                title: Text('Ikeja Lagos',
+                                    style: TextStyle(color: Colors.white)),
                               )
                             ],
                           )))
