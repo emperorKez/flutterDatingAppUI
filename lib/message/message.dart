@@ -14,57 +14,75 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios)),
+        title: Text('Messages'),
+        centerTitle: true,
+      ),
       body: Column(
-        // shrinkWrap: true,
-        //physics: ClampingScrollPhysics(),
-        //physics: NeverScrollableScrollPhysics(),
         children: [
           Container(
+            padding: EdgeInsets.all(10),
             color: Colors.white,
-            height: 150,
+            height: 100,
             child: GridView.builder(
-              //shrinkWrap: true,
               physics: AlwaysScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 1,
-              ),
-              itemCount: 4,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 1,
+                  childAspectRatio: 1.25),
+              itemCount: 6,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  // height: 100,
-                  // width: 100,
-                  color: Colors.green,
-                  child: activeOnline(),
-                );
-                
+                return activeOnline(index);
               },
             ),
           ),
-          SizedBox(
-            height: 25,
-          ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 10),
               shrinkWrap: true,
               physics: AlwaysScrollableScrollPhysics(),
-              itemCount: 10,
+              itemCount: 6,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                    ),
-                    title: Text('Monica'),
-                    subtitle: Text('how are you today'),
-                    trailing: Text('08:30 AM'),
-                    tileColor: Colors.amberAccent,
-                    onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChatScreen()),
-                        ));
-                //return massegeTile();
+                int i = index + 1;
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white10,
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    vertical: 5,
+                  ),
+                  height: 80,
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/thumbnail-$i.jpg'),
+                        radius: 30,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: ListTile(
+                            title: Text('Monica'),
+                            subtitle: Text('how are you today'),
+                            trailing: Text('08:30 AM'),
+                            contentPadding: EdgeInsets.zero,
+                            onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChatScreen()),
+                                )),
+                      ),
+                    ],
+                  ),
+                );
               },
             ),
           ),
@@ -74,14 +92,21 @@ class _MessageScreenState extends State<MessageScreen> {
     ));
   }
 
-  Widget activeOnline() {
+  Widget activeOnline(i) {
+    i = i + 1;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: const [
-        CircleAvatar(
-          radius: 50,
+      children: [
+        Expanded(
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/images/thumbnail-$i.jpg'),
+            maxRadius: 50,
+          ),
+        ),
+        SizedBox(
+          height: 5,
         ),
         Text('Monalisa')
       ],
@@ -94,7 +119,6 @@ Widget massegeTile() {
       builder: (context) => Card(
             child: ListTile(
                 leading: CircleAvatar(
-                    //radius: double.infinity,
                     ),
                 title: Text('Monica'),
                 subtitle: Text('how are you today'),

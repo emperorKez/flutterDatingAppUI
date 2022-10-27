@@ -1,5 +1,6 @@
 import 'package:dating_app/settings/settings.dart';
 import 'package:dating_app/widgets/bottom_nav.dart';
+import 'package:dating_app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -21,12 +22,13 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back_ios)),
+        // leading: IconButton(
+        //     onPressed: () => Navigator.pop(context),
+        //     icon: Icon(Icons.arrow_back_ios)),
         title: Text('My Profile'),
         centerTitle: true,
       ),
+      drawer: SettingsDrawer(),
       body: ListView(
         shrinkWrap: true,
         physics: AlwaysScrollableScrollPhysics(),
@@ -52,21 +54,20 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text('About me'),
+          ),
           aboutMe(),
           SizedBox(
             height: 15,
           ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text('My photos'),
+          ),
           myPhotos(),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SettingsScreen(),
-                )),
-          )
         ],
       ),
       bottomNavigationBar: BottomNavBar(activeIndex: 0),
@@ -104,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
   aboutMe() {
     return Container(
         decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.9),
+            color: Color.fromARGB(255, 226, 223, 223),
             borderRadius: BorderRadius.circular(10)),
         padding: EdgeInsets.all(10),
         child: ListView(
